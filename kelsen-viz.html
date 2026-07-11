@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<script>
+(function(){var t=localStorage.getItem('kl-theme')||(window.matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',t);})();
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>論 Kelsen 的權威概念 — On Kelsen's Concept of Authority</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0F0D14;
+  --bg2: #161320;
+  --bg3: #1E1B2A;
+  --bg4: #262335;
+  --copper: #C4894A;
+  --copper-dim: #7A5228;
+  --copper-pale: rgba(196,137,74,0.12);
+  --violet: #9080C8;
+  --violet-dim: rgba(144,128,200,0.15);
+  --cream: #F0E8D8;
+  --cream2: #C0B89E;
+  --muted: #7A7290;
+  --border: rgba(196,137,74,0.16);
+  --border2: rgba(196,137,74,0.32);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { background:var(--bg); color:var(--cream); font-family:'Noto Serif TC','Georgia',serif; font-size:17px; line-height:1.75; }
+
+/* ── NAV ── */
+nav { position:fixed; top:0; left:0; right:0; z-index:99; padding:0 6vw; height:50px; display:flex; align-items:center; justify-content:space-between; background:rgba(15,13,20,0.88); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); }
+.nav-zh { font-size:13px; color:var(--copper); letter-spacing:0.08em; }
+.nav-en { font-family:'EB Garamond',serif; font-style:italic; font-size:13px; color:var(--muted); }
+.nav-links { display:flex; gap:0; }
+.nav-links a { font-family:'Space Mono',monospace; font-size:10px; color:var(--muted); text-decoration:none; padding:0 12px; border-left:1px solid var(--border); letter-spacing:0.05em; transition:color 0.2s; }
+.nav-links a:hover { color:var(--copper); }
+
+/* ── HERO ── */
+.hero { min-height:100vh; display:grid; place-items:center; padding:100px 6vw 60px; text-align:center; position:relative; overflow:hidden; }
+.hero::before { content:''; position:absolute; inset:0; background: radial-gradient(ellipse at 50% 30%, rgba(144,128,200,0.07) 0%, transparent 55%), radial-gradient(ellipse at 20% 80%, rgba(196,137,74,0.05) 0%, transparent 50%); pointer-events:none; }
+.hero-kana { font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.3em; color:var(--copper-dim); text-transform:uppercase; margin-bottom:2rem; }
+.hero-zh { font-family:'Noto Serif TC',serif; font-size:clamp(2.4rem,6vw,5.2rem); font-weight:700; color:var(--cream); line-height:1.15; letter-spacing:0.04em; margin-bottom:0.6rem; }
+.hero-en { font-family:'EB Garamond',serif; font-style:italic; font-size:clamp(1.2rem,2.8vw,2.2rem); color:var(--cream2); margin-bottom:3rem; letter-spacing:0.02em; }
+.hero-rule { width:60px; height:1px; background:var(--copper); margin:0 auto 2.5rem; }
+.hero-abstract { max-width:640px; margin:0 auto 3rem; font-size:1rem; color:var(--muted); line-height:1.85; font-weight:300; }
+.hero-meta { display:flex; gap:3rem; justify-content:center; flex-wrap:wrap; }
+.meta-item { text-align:center; }
+.meta-zh { font-size:0.82rem; color:var(--copper); letter-spacing:0.1em; }
+.meta-en { font-family:'EB Garamond',serif; font-style:italic; font-size:0.9rem; color:var(--muted); }
+
+/* ── SECTIONS ── */
+section { padding:90px 6vw; }
+section:nth-child(even) { background:var(--bg2); }
+.sec-eyebrow { display:flex; align-items:center; gap:12px; margin-bottom:1rem; }
+.sec-eyebrow::before { content:''; width:24px; height:1px; background:var(--copper); display:block; }
+.sec-tag { font-family:'Space Mono',monospace; font-size:10px; color:var(--copper); letter-spacing:0.18em; text-transform:uppercase; }
+.sec-zh { font-family:'Noto Serif TC',serif; font-size:clamp(1.7rem,3.2vw,2.6rem); font-weight:700; color:var(--cream); line-height:1.25; margin-bottom:0.3rem; }
+.sec-en { font-family:'EB Garamond',serif; font-style:italic; font-size:1.1rem; color:var(--cream2); margin-bottom:2.5rem; letter-spacing:0.03em; }
+
+/* ── PULL QUOTE ── */
+.pullquote { border-left:3px solid var(--copper); padding:1.4rem 2rem; margin:2.5rem 0; background:var(--copper-pale); border-radius:0 6px 6px 0; }
+.pq-zh { font-size:1.05rem; color:var(--cream); line-height:1.7; margin-bottom:6px; }
+.pq-en { font-family:'EB Garamond',serif; font-style:italic; font-size:0.95rem; color:var(--cream2); line-height:1.6; }
+
+/* ── RESEARCH QUESTIONS ── */
+.rq-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; }
+.rq-card { background:var(--bg3); border:1px solid var(--border); border-radius:8px; padding:1.6rem; position:relative; cursor:pointer; transition:border-color 0.25s, background 0.25s; }
+.rq-card:hover { border-color:var(--border2); background:var(--bg4); }
+.rq-num { font-family:'EB Garamond',serif; font-size:3.5rem; font-weight:500; color:rgba(196,137,74,0.14); position:absolute; top:12px; right:16px; line-height:1; }
+.rq-zh { font-size:1rem; color:var(--cream); line-height:1.65; margin-bottom:10px; font-weight:400; }
+.rq-en { font-family:'EB Garamond',serif; font-style:italic; font-size:0.88rem; color:var(--muted); line-height:1.55; }
+
+/* ── THREE PERIODS ── */
+.periods { position:relative; margin-top:1rem; }
+.period-line { position:absolute; left:0; top:26px; right:0; height:1px; background:linear-gradient(to right, transparent, var(--copper-dim) 15%, var(--copper-dim) 85%, transparent); }
+.period-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:0; position:relative; }
+.period { padding:60px 1.5rem 1.5rem; }
+.period-dot { position:absolute; top:20px; left:50%; transform:translateX(-50%); width:14px; height:14px; border-radius:50%; border:2px solid var(--copper); background:var(--bg); position:relative; margin:0 auto 1.5rem; }
+.period-dot.active { background:var(--copper); box-shadow:0 0 16px rgba(196,137,74,0.5); }
+.period-year { font-family:'Space Mono',monospace; font-size:11px; color:var(--copper); margin-bottom:6px; }
+.period-zh { font-family:'Noto Serif TC',serif; font-size:1.15rem; font-weight:600; color:var(--cream); margin-bottom:3px; }
+.period-en { font-family:'EB Garamond',serif; font-style:italic; font-size:0.9rem; color:var(--cream2); margin-bottom:1rem; }
+.period-desc { font-size:0.85rem; color:var(--muted); line-height:1.65; }
+.period-desc-en { font-family:'EB Garamond',serif; font-style:italic; font-size:0.82rem; color:var(--muted); opacity:0.75; margin-top:6px; }
+.period-works { margin-top:1rem; }
+.work-item { font-family:'Space Mono',monospace; font-size:9px; color:var(--copper-dim); border:1px solid var(--border); border-radius:3px; padding:3px 8px; display:inline-block; margin:2px 2px 0 0; letter-spacing:0.05em; }
+
+/* ── AUTHORITY TYPES ── */
+.auth-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.auth-card { background:var(--bg3); border:1px solid var(--border); border-radius:8px; padding:1.4rem 1.5rem; transition:border-color 0.2s; }
+.auth-card:hover { border-color:var(--border2); }
+.auth-num { font-family:'Space Mono',monospace; font-size:9px; color:var(--copper-dim); letter-spacing:0.15em; margin-bottom:8px; }
+.auth-zh { font-family:'Noto Serif TC',serif; font-size:1.1rem; font-weight:600; color:var(--copper); margin-bottom:3px; }
+.auth-en { font-family:'EB Garamond',serif; font-style:italic; font-size:0.9rem; color:var(--cream2); margin-bottom:10px; }
+.auth-body { font-size:0.85rem; color:var(--muted); line-height:1.65; }
+.auth-body-en { font-family:'EB Garamond',serif; font-style:italic; font-size:0.82rem; color:var(--muted); opacity:0.75; margin-top:5px; }
+
+/* ── THEORISTS COMPARE ── */
+.theorist-tabs { display:flex; border-bottom:1px solid var(--border); margin-bottom:2rem; overflow-x:auto; }
+.t-tab { padding:10px 20px; font-family:'Space Mono',monospace; font-size:11px; color:var(--muted); border-bottom:2px solid transparent; cursor:pointer; white-space:nowrap; transition:color 0.2s, border-color 0.2s; }
+.t-tab.active { color:var(--copper); border-bottom-color:var(--copper); }
+.theorist-panel { display:none; }
+.theorist-panel.active { display:grid; grid-template-columns:1fr 2fr; gap:3rem; align-items:start; }
+.th-ident { }
+.th-name-zh { font-family:'Noto Serif TC',serif; font-size:2rem; font-weight:700; color:var(--cream); margin-bottom:3px; }
+.th-name-en { font-family:'EB Garamond',serif; font-style:italic; font-size:1.1rem; color:var(--cream2); margin-bottom:1rem; }
+.th-era { font-family:'Space Mono',monospace; font-size:10px; color:var(--copper-dim); letter-spacing:0.1em; margin-bottom:1.5rem; }
+.th-tag { display:inline-block; font-family:'Space Mono',monospace; font-size:9px; padding:3px 8px; border-radius:3px; border:1px solid var(--border); color:var(--muted); letter-spacing:0.08em; margin-bottom:6px; }
+.th-content { }
+.th-section { margin-bottom:1.5rem; }
+.th-section-label { font-family:'Space Mono',monospace; font-size:9px; color:var(--copper); letter-spacing:0.15em; text-transform:uppercase; margin-bottom:8px; }
+.th-zh { font-size:0.95rem; color:var(--cream); line-height:1.7; margin-bottom:6px; }
+.th-en { font-family:'EB Garamond',serif; font-style:italic; font-size:0.88rem; color:var(--muted); line-height:1.6; }
+
+/* ── RAZ THESES ── */
+.raz-chain { display:flex; flex-direction:column; gap:0; }
+.raz-node { display:grid; grid-template-columns:80px 1fr; gap:1.5rem; align-items:start; position:relative; padding-bottom:2rem; }
+.raz-node::before { content:''; position:absolute; left:39px; top:48px; bottom:0; width:1px; background:linear-gradient(to bottom, var(--copper-dim), transparent); }
+.raz-node:last-child::before { display:none; }
+.raz-num { }
+.raz-circle { width:48px; height:48px; border-radius:50%; border:1.5px solid var(--copper); display:flex; align-items:center; justify-content:center; font-family:'EB Garamond',serif; font-size:1.5rem; color:var(--copper); background:var(--bg); }
+.raz-body { padding-top:10px; }
+.raz-title-zh { font-family:'Noto Serif TC',serif; font-size:1.1rem; font-weight:600; color:var(--cream); margin-bottom:2px; }
+.raz-title-en { font-family:'EB Garamond',serif; font-style:italic; font-size:0.9rem; color:var(--cream2); margin-bottom:8px; }
+.raz-desc { font-size:0.85rem; color:var(--muted); line-height:1.7; }
+.raz-desc-en { font-family:'EB Garamond',serif; font-style:italic; font-size:0.82rem; color:var(--muted); opacity:0.72; margin-top:5px; }
+
+/* ── STUFENBAU ── */
+.stuf-wrap { max-width:520px; margin:0 auto; }
+.stuf-tier { border-radius:4px; margin-bottom:8px; overflow:hidden; cursor:pointer; transition:opacity 0.2s; }
+.stuf-tier:hover { opacity:0.88; }
+.stuf-inner { padding:14px 24px; display:flex; justify-content:space-between; align-items:center; gap:1rem; }
+.stuf-zh { font-family:'Noto Serif TC',serif; font-size:1rem; font-weight:600; }
+.stuf-en { font-family:'EB Garamond',serif; font-style:italic; font-size:0.88rem; }
+.stuf-detail { max-height:0; overflow:hidden; transition:max-height 0.4s ease, padding 0.3s; font-size:0.83rem; line-height:1.65; padding:0 24px; }
+.stuf-detail.open { max-height:180px; padding:0 24px 14px; }
+.stuf-detail-en { font-family:'EB Garamond',serif; font-style:italic; opacity:0.7; display:block; margin-top:4px; }
+.s1 { background:linear-gradient(135deg,#2A1E0C,#3A2A10); border:1px solid rgba(196,137,74,0.4); }
+.s1 .stuf-zh { color:#D4A060; } .s1 .stuf-en { color:#A07840; } .s1 .stuf-detail { color:#A07840; }
+.s2 { background:linear-gradient(135deg,#1C1628,#261C38); border:1px solid rgba(144,128,200,0.35); }
+.s2 .stuf-zh { color:#A090D8; } .s2 .stuf-en { color:#7868A8; } .s2 .stuf-detail { color:#7868A8; }
+.s3 { background:linear-gradient(135deg,#0E1A22,#142230); border:1px solid rgba(74,140,180,0.3); }
+.s3 .stuf-zh { color:#6AACCC; } .s3 .stuf-en { color:#4A8CA8; } .s3 .stuf-detail { color:#4A8CA8; }
+.s4 { background:linear-gradient(135deg,#0C1E14,#102218); border:1px solid rgba(74,160,110,0.3); }
+.s4 .stuf-zh { color:#70C890; } .s4 .stuf-en { color:#4A9068; } .s4 .stuf-detail { color:#4A9068; }
+.s5 { background:linear-gradient(135deg,#1C1014,#221218); border:1px solid rgba(180,80,80,0.3); }
+.s5 .stuf-zh { color:#C08080; } .s5 .stuf-en { color:#906060; } .s5 .stuf-detail { color:#906060; }
+.stuf-arrow { text-align:center; color:var(--copper-dim); font-size:1.2rem; margin:4px 0; }
+
+/* ── NORM FUNCTIONS ── */
+.norm-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+.norm-card { border-radius:8px; padding:1.5rem; border:1px solid; }
+.nc-1 { background:rgba(196,137,74,0.08); border-color:rgba(196,137,74,0.25); }
+.nc-2 { background:rgba(196,90,58,0.08); border-color:rgba(196,90,58,0.2); }
+.nc-3 { background:rgba(74,130,196,0.08); border-color:rgba(74,130,196,0.22); }
+.nc-4 { background:rgba(80,180,120,0.08); border-color:rgba(80,180,120,0.22); }
+.nc-icon { font-size:1.5rem; margin-bottom:10px; }
+.nc-zh { font-family:'Noto Serif TC',serif; font-size:1rem; font-weight:600; color:var(--cream); margin-bottom:3px; }
+.nc-en { font-family:'EB Garamond',serif; font-style:italic; font-size:0.88rem; color:var(--cream2); margin-bottom:10px; }
+.nc-desc { font-size:0.83rem; color:var(--muted); line-height:1.6; }
+.nc-desc-en { font-family:'EB Garamond',serif; font-style:italic; font-size:0.8rem; color:var(--muted); opacity:0.7; margin-top:5px; }
+
+/* ── VALIDITY ── */
+.valid-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+.v-card { background:var(--bg3); border:1px solid var(--border); border-radius:8px; padding:1.5rem; text-align:center; }
+.v-zhnum { font-family:'Noto Serif TC',serif; font-size:0.9rem; color:var(--copper); margin-bottom:0.5rem; letter-spacing:0.05em; }
+.v-zh { font-family:'Noto Serif TC',serif; font-size:1.1rem; font-weight:600; color:var(--cream); margin-bottom:4px; }
+.v-en { font-family:'EB Garamond',serif; font-style:italic; font-size:0.9rem; color:var(--cream2); margin-bottom:1rem; }
+.v-desc { font-size:0.83rem; color:var(--muted); line-height:1.6; text-align:left; }
+.v-desc-en { font-family:'EB Garamond',serif; font-style:italic; font-size:0.8rem; color:var(--muted); opacity:0.7; text-align:left; margin-top:5px; }
+.v-kelsen { margin-top:10px; font-family:'Space Mono',monospace; font-size:9px; padding:4px 8px; border-radius:3px; display:inline-block; letter-spacing:0.05em; }
+.v-k1 { background:rgba(196,137,74,0.12); color:#C4894A; border:1px solid rgba(196,137,74,0.25); }
+.v-k2 { background:rgba(74,140,196,0.12); color:#6AACCC; border:1px solid rgba(74,140,196,0.25); }
+.v-k3 { background:rgba(120,80,180,0.12); color:#9878CC; border:1px solid rgba(120,80,180,0.25); }
+
+/* ── CONCLUSIONS ── */
+.conc-list { display:flex; flex-direction:column; gap:20px; counter-reset:conc; }
+.conc-item { display:grid; grid-template-columns:64px 1fr; gap:1.5rem; align-items:start; counter-increment:conc; }
+.conc-num { font-family:'EB Garamond',serif; font-size:3rem; font-weight:500; color:rgba(196,137,74,0.35); line-height:1; padding-top:4px; }
+.conc-body { }
+.conc-zh { font-family:'Noto Serif TC',serif; font-size:1.05rem; color:var(--cream); line-height:1.65; margin-bottom:6px; font-weight:600; }
+.conc-en { font-family:'EB Garamond',serif; font-style:italic; font-size:0.95rem; color:var(--cream2); line-height:1.6; margin-bottom:10px; }
+.conc-explain { font-size:0.85rem; color:var(--muted); line-height:1.7; }
+.conc-explain-en { font-family:'EB Garamond',serif; font-style:italic; font-size:0.82rem; color:var(--muted); opacity:0.7; margin-top:5px; }
+
+/* ── INTELLECTUAL ARC ── */
+.arc-grid { display:grid; grid-template-columns: 1fr 40px 1fr 40px 1fr; align-items:stretch; gap:0.5rem; margin-top:1rem; margin-bottom:1rem; }
+.arc-node { background:var(--bg3); border:1px solid var(--border); border-radius:8px; padding:1.6rem 1.4rem; display:flex; flex-direction:column; transition:border-color 0.2s; }
+.arc-node:hover { border-color:var(--border2); }
+.arc-node-progress { border-style:dashed; }
+.arc-year { font-family:'Space Mono',monospace; font-size:1.3rem; color:var(--copper); margin-bottom:6px; display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+.arc-tag-progress { font-size:9px; font-family:'Space Mono',monospace; letter-spacing:0.1em; color:var(--copper-dim); border:1px solid var(--border2); border-radius:3px; padding:2px 6px; }
+.arc-label { font-family:'Space Mono',monospace; font-size:9px; color:var(--copper-dim); letter-spacing:0.13em; text-transform:uppercase; margin-bottom:10px; }
+.arc-title-zh { font-family:'Noto Serif TC',serif; font-size:1.15rem; font-weight:600; color:var(--cream); line-height:1.4; margin-bottom:2px; }
+.arc-title-en { font-family:'EB Garamond',serif; font-style:italic; font-size:0.92rem; color:var(--cream2); line-height:1.3; margin-bottom:10px; }
+.arc-body { font-size:0.85rem; color:var(--muted); line-height:1.65; margin-bottom:4px; }
+.arc-body-en { font-family:'EB Garamond',serif; font-style:italic; font-size:0.8rem; color:var(--muted); opacity:0.72; line-height:1.6; flex-grow:1; margin-bottom:14px; }
+.arc-link { font-family:'Space Mono',monospace; font-size:9px; color:var(--copper); text-decoration:none; letter-spacing:0.04em; border-bottom:1px solid transparent; transition:border-color 0.2s; align-self:flex-start; }
+.arc-link:hover { border-bottom-color:var(--copper); }
+.arc-connector { display:flex; align-items:center; justify-content:center; font-family:'Space Mono',monospace; font-size:1.4rem; color:var(--copper-dim); }
+.arc-cta { display:inline-block; font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.1em; color:var(--copper); border:1px solid var(--border2); border-radius:4px; padding:10px 22px; text-decoration:none; transition:border-color 0.2s; }
+.arc-cta:hover { border-color:var(--copper); }
+
+/* ── FOOTER ── */
+footer { background:var(--bg); border-top:1px solid var(--border); padding:2.5rem 6vw; text-align:center; }
+.ft-zh { font-size:0.85rem; color:var(--muted); margin-bottom:4px; }
+.ft-en { font-family:'EB Garamond',serif; font-style:italic; font-size:0.85rem; color:var(--muted); opacity:0.6; }
+
+/* ── UTILITY ── */
+.two-col { display:grid; grid-template-columns:1fr 1fr; gap:4rem; }
+.divider { height:1px; background:var(--border); margin:2.5rem 0; }
+.scroll-reveal { opacity:0; transform:translateY(20px); transition:opacity 0.7s ease, transform 0.7s ease; }
+.scroll-reveal.visible { opacity:1; transform:none; }
+
+@media(max-width:768px) {
+  .period-grid { grid-template-columns:1fr; }
+  .period-line { display:none; }
+  .auth-grid { grid-template-columns:1fr; }
+  .theorist-panel.active { grid-template-columns:1fr; }
+  .norm-grid { grid-template-columns:1fr; }
+  .valid-grid { grid-template-columns:1fr; }
+  .two-col { grid-template-columns:1fr; gap:2rem; }
+  .nav-links { display:none; }
+  .conc-item { grid-template-columns:48px 1fr; }
+  .arc-grid { grid-template-columns:1fr; }
+  .arc-connector { display:none; }
+}
+
+/* ── LIGHT THEME ── */
+html[data-theme="light"] {
+  --bg:#F5F0E8; --bg2:#ECE6D8; --bg3:#FFFFFF; --bg4:#E4DECE;
+  --copper:#9A6828; --copper-dim:#6A4818; --copper-pale:rgba(154,104,40,0.08);
+  --violet:#6050A0; --violet-dim:rgba(96,80,160,0.08);
+  --cream:#1A120A; --cream2:#3A2818; --muted:#5A5050;
+  --border:rgba(120,80,25,0.16); --border2:rgba(120,80,25,0.32);
+}
+html[data-theme="light"] body { background:var(--bg); }
+html[data-theme="light"] nav { background:rgba(245,240,232,0.94); }
+html[data-theme="light"] .hero::before { background: radial-gradient(ellipse at 50% 30%, rgba(96,80,160,0.05) 0%,transparent 55%), radial-gradient(ellipse at 20% 80%, rgba(154,104,40,0.06) 0%,transparent 50%); }
+html[data-theme="light"] .rq-card { background:#FFF; }
+html[data-theme="light"] .auth-card { background:#FFF; }
+html[data-theme="light"] .th-tag { color:var(--muted); border-color:var(--border); }
+html[data-theme="light"] .raz-circle { background:var(--bg3); }
+html[data-theme="light"] .period-dot { background:var(--bg); }
+html[data-theme="light"] .period-dot.active { background:var(--copper); }
+html[data-theme="light"] .v-card { background:#FFF; }
+html[data-theme="light"] .v-kelsen { }
+html[data-theme="light"] .v-k1 { background:rgba(154,104,40,0.1); color:#7A5010; border-color:rgba(154,104,40,0.25); }
+html[data-theme="light"] .v-k2 { background:rgba(40,100,160,0.08); color:#105080; border-color:rgba(40,100,160,0.2); }
+html[data-theme="light"] .v-k3 { background:rgba(90,60,150,0.08); color:#4A2890; border-color:rgba(90,60,150,0.2); }
+html[data-theme="light"] .conc-num { color:rgba(130,90,25,0.22); }
+html[data-theme="light"] .s1 { background:linear-gradient(135deg,#FDF6EC,#F8EAD0); border-color:rgba(160,110,35,0.42); }
+html[data-theme="light"] .s1 .stuf-zh { color:#7A5010; } html[data-theme="light"] .s1 .stuf-en { color:#6A4010; } html[data-theme="light"] .s1 .stuf-detail { color:#6A4010; }
+html[data-theme="light"] .s2 { background:linear-gradient(135deg,#F4F0FC,#EAE4F8); border-color:rgba(90,70,160,0.42); }
+html[data-theme="light"] .s2 .stuf-zh { color:#4A3090; } html[data-theme="light"] .s2 .stuf-en { color:#382080; } html[data-theme="light"] .s2 .stuf-detail { color:#382080; }
+html[data-theme="light"] .s3 { background:linear-gradient(135deg,#EEF4FC,#DCE8F8); border-color:rgba(40,108,170,0.42); }
+html[data-theme="light"] .s3 .stuf-zh { color:#185888; } html[data-theme="light"] .s3 .stuf-en { color:#104878; } html[data-theme="light"] .s3 .stuf-detail { color:#104878; }
+html[data-theme="light"] .s4 { background:linear-gradient(135deg,#EEF8F2,#DDEEE6); border-color:rgba(30,140,70,0.42); }
+html[data-theme="light"] .s4 .stuf-zh { color:#186830; } html[data-theme="light"] .s4 .stuf-en { color:#105020; } html[data-theme="light"] .s4 .stuf-detail { color:#105020; }
+html[data-theme="light"] .s5 { background:linear-gradient(135deg,#FCF0F0,#F8DEDE); border-color:rgba(170,55,55,0.42); }
+html[data-theme="light"] .s5 .stuf-zh { color:#902020; } html[data-theme="light"] .s5 .stuf-en { color:#781818; } html[data-theme="light"] .s5 .stuf-detail { color:#781818; }
+html[data-theme="light"] .nc-1 { background:rgba(154,104,40,0.06); border-color:rgba(154,104,40,0.22); }
+html[data-theme="light"] .nc-2 { background:rgba(180,75,45,0.06); border-color:rgba(180,75,45,0.18); }
+html[data-theme="light"] .nc-3 { background:rgba(50,110,180,0.06); border-color:rgba(50,110,180,0.18); }
+html[data-theme="light"] .nc-4 { background:rgba(55,160,100,0.06); border-color:rgba(55,160,100,0.18); }
+html[data-theme="light"] .nc-zh { color:var(--cream); }
+html[data-theme="light"] .nc-en { color:var(--cream2); }
+html[data-theme="light"] .pullquote { background:rgba(154,104,40,0.07); }
+html[data-theme="light"] .theorist-tabs { border-bottom-color:var(--border); }
+html[data-theme="light"] .stuf-arrow { color:var(--copper-dim); }
+
+/* toggle button */
+.theme-btn { background:none; border:1px solid var(--border); color:var(--copper); font-family:'Space Mono',monospace; font-size:10px; padding:5px 12px; cursor:pointer; border-radius:3px; letter-spacing:0.1em; transition:border-color 0.2s; }
+.theme-btn:hover { border-color:var(--border2); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div>
+    <span class="nav-zh">論 Kelsen 的權威概念</span>
+    <span class="nav-en"> &nbsp;·&nbsp; On Kelsen's Concept of Authority</span>
+  </div>
+  <div class="nav-links">
+    <a href="#questions">問題意識</a>
+    <a href="#periods">三分期</a>
+    <a href="#theorists">思想家</a>
+    <a href="#stufenbau">規範階層</a>
+    <a href="#norms">規範類型</a>
+    <a href="#conclusion">結論</a>
+    <a href="#arc">研究軸線</a>
+    <button class="theme-btn" onclick="toggleTheme()" id="themeBtn">◑ LIGHT</button>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div>
+    <div class="hero-kana">臺灣大學法律學系碩士論文 &nbsp;·&nbsp; NTU Faculty of Law Master's Thesis · 2006</div>
+    <div class="hero-zh">論 Kelsen 的權威概念</div>
+    <div class="hero-en">On Kelsen's Concept of Authority</div>
+    <div class="hero-rule"></div>
+    <p class="hero-abstract">
+      法理學對「權威」的討論，往往隱而不顯。Kelsen 從未為權威單獨立論，
+      然而其規範體系的深層結構，究竟能否支撐一種「弱意義」的法律權威？
+      本論文沿著 Hobbes、Finnis、Raz 的足跡，重返純粹法學的核心，
+      試圖給出一個更誠實的回答。
+      <br><br>
+      <em style="font-family:'EB Garamond',serif;font-style:italic;font-size:0.9rem;color:var(--muted);">
+      Jurisprudence has long neglected the question of authority. Kelsen never wrote a standalone treatise on it — yet his normative architecture may harbour a "weak" concept of legal authority. This thesis follows the footprints of Hobbes, Finnis, and Raz back into the heart of the Pure Theory of Law, seeking a more honest answer.
+      </em>
+    </p>
+    <div class="hero-meta">
+      <div class="meta-item">
+        <div class="meta-zh">研究生</div>
+        <div class="meta-en">高昌華 Chang-Hua Kao</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-zh">指導教授</div>
+        <div class="meta-en">顏厥安 博士</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-zh">論文分期</div>
+        <div class="meta-en">六章 · 254 頁</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-zh">完成年份</div>
+        <div class="meta-en">中華民國九十五年</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── RESEARCH QUESTIONS ── -->
+<section id="questions">
+  <div class="sec-eyebrow"><div class="sec-tag">問題意識 · Research Questions</div></div>
+  <h2 class="sec-zh">本文試圖回答的三個問題</h2>
+  <div class="sec-en">Three core questions this thesis sets out to answer</div>
+
+  <div class="pullquote">
+    <div class="pq-zh">「法理學的議題，通常集中在關於法認識論或法倫理學部份……至於權威的概念，通常都被隱身其理論架構下，甚至有些理論甚至拒絕這樣的權威。」</div>
+    <div class="pq-en">"Jurisprudence has typically focused on epistemology or ethics of law… the concept of authority is usually hidden within theoretical frameworks, and some theories reject it altogether." — Ch. 1</div>
+  </div>
+
+  <div class="rq-grid">
+    <div class="rq-card scroll-reveal">
+      <div class="rq-num">一</div>
+      <div class="rq-zh">權威的定義為何？Kelsen 如何理解「計畫重建」與「直接分析」兩種進路之異同？</div>
+      <div class="rq-en">What is authority? How does Kelsen relate the method of "planned reconstruction" to direct conceptual analysis of authority?</div>
+    </div>
+    <div class="rq-card scroll-reveal">
+      <div class="rq-num">二</div>
+      <div class="rq-zh">Kelsen 的法律體系是否具有權威？其規範架構能否支撐一種法律權威概念的存在？</div>
+      <div class="rq-en">Does Kelsen's legal system possess authority? Can his normative architecture sustain the existence of a concept of legal authority?</div>
+    </div>
+    <div class="rq-card scroll-reveal">
+      <div class="rq-num">三</div>
+      <div class="rq-zh">Kelsen 的權威內容為何？其充權規範體系能否支持「弱意義」而非「強閱讀」的權威概念？</div>
+      <div class="rq-en">What does Kelsen's authority amount to? Can his empowerment norms support a "weak" rather than "strong" reading of authority?</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── THREE PERIODS ── -->
+<section id="periods">
+  <div class="sec-eyebrow"><div class="sec-tag">思想分期 · Intellectual Periods</div></div>
+  <h2 class="sec-zh">Kelsen 思想三分期</h2>
+  <div class="sec-en">Three Periods in the Development of Kelsen's Pure Theory of Law</div>
+
+  <div class="pullquote">
+    <div class="pq-zh">本文將 Kelsen 的思想發展區分為三個時期，以掌握其權威論述的演變軌跡——從批判建構到懷疑，見證一位法學巨擘的思想轉型。</div>
+    <div class="pq-en">The thesis divides Kelsen's intellectual development into three periods to trace the evolution of his stance on authority — from critical construction to ultimate skepticism, witnessing the transformation of a jurisprudential giant.</div>
+  </div>
+
+  <div class="periods scroll-reveal">
+    <div class="period-line"></div>
+    <div class="period-grid">
+
+      <div class="period">
+        <div class="period-dot active"></div>
+        <div class="period-year">c. 1911 — 1921</div>
+        <div class="period-zh">批判建構期</div>
+        <div class="period-en">Critical-Constructive Period</div>
+        <div class="period-desc">以新康德主義為方法論基礎，Kelsen 建立純粹法學的初步架構。強調法與道德的分離，以「歸責」取代自然法的因果概念，奠定規範理論的起點。</div>
+        <div class="period-desc-en">Drawing on Neo-Kantian methodology, Kelsen laid the foundations of the Pure Theory. He emphasised the separation of law from morality and substituted "imputation" for causal explanation.</div>
+        <div class="period-works">
+          <span class="work-item">HP 1911</span>
+          <span class="work-item">方法二元論</span>
+          <span class="work-item">歸責概念</span>
+        </div>
+      </div>
+
+      <div class="period">
+        <div class="period-dot active"></div>
+        <div class="period-year">c. 1921 — 1960</div>
+        <div class="period-zh">經典期</div>
+        <div class="period-en">Classical Period</div>
+        <div class="period-desc">純粹法學的成熟階段。確立規範階層論（Stufenbau）、基本規範（Grundnorm）、動態與靜態規範體系，並提出充權（Empowerment）為核心規範形式。此期是論文分析的主要焦點。</div>
+        <div class="period-desc-en">The mature phase. The Stufenbau (hierarchical structure), Grundnorm, and dynamic/static normative systems were fully developed. Empowerment norms emerged as central. This period is the primary focus of analysis.</div>
+        <div class="period-works">
+          <span class="work-item">RR1 1934</span>
+          <span class="work-item">GTLS 1945</span>
+          <span class="work-item">RR2 1960</span>
+          <span class="work-item">Stufenbau</span>
+        </div>
+      </div>
+
+      <div class="period">
+        <div class="period-dot"></div>
+        <div class="period-year">c. 1960 — 1973</div>
+        <div class="period-zh">懷疑期</div>
+        <div class="period-en">Skeptical Period</div>
+        <div class="period-desc">晚期 Kelsen 對自身體系提出根本性的質疑。對基本規範的本質、邏輯矛盾律適用於規範衝突，以及「應然」概念的非理性化，均轉向更為存疑的立場，使傳統權威論述更加困難。</div>
+        <div class="period-desc-en">The late Kelsen raised fundamental doubts about his own system. He questioned the Grundnorm's nature, the applicability of logic to norm conflicts, and shifted toward a more skeptical position on the "ought," making traditional authority even harder to sustain.</div>
+        <div class="period-works">
+          <span class="work-item">GTN 1979</span>
+          <span class="work-item">規範衝突</span>
+          <span class="work-item">非理性化</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── AUTHORITY TAXONOMY ── -->
+<section id="authority-types">
+  <div class="sec-eyebrow"><div class="sec-tag">概念分析 · Conceptual Analysis</div></div>
+  <h2 class="sec-zh">權威的四種分類</h2>
+  <div class="sec-en">Four Classifications of Authority</div>
+
+  <div class="auth-grid scroll-reveal">
+    <div class="auth-card">
+      <div class="auth-num">分類一 · CLASSIFICATION I</div>
+      <div class="auth-zh">神聖權威 vs 世俗權威</div>
+      <div class="auth-en">Divine Authority vs. Secular Authority</div>
+      <div class="auth-body">接近權威來源的分類。近代法學在去神學化的過程中，神聖權威逐漸退場，但「超越實證法體系的權威是否存在」的核心問題，依然保留。</div>
+      <div class="auth-body-en">A classification by the source of authority. As modern jurisprudence moved away from theology, divine authority receded — but the core question of whether any authority transcends positive law remains.</div>
+    </div>
+    <div class="auth-card">
+      <div class="auth-num">分類二 · CLASSIFICATION II</div>
+      <div class="auth-zh">社會學上的功能性觀察</div>
+      <div class="auth-en">Sociological-Functional Classification</div>
+      <div class="auth-body">觀察實際運作中的「變型權威」。強調的不是規範性問題（應不應服從），而是社會現象的描述——權威如何在制度中實際發揮功能。</div>
+      <div class="auth-body-en">Focuses on "authority in operation" as a social phenomenon. The emphasis is not normative (ought one obey?) but descriptive — how authority actually functions within institutions.</div>
+    </div>
+    <div class="auth-card">
+      <div class="auth-num">分類三 · CLASSIFICATION III</div>
+      <div class="auth-zh">正當權威 vs 事實權威</div>
+      <div class="auth-en">De Jure vs. De Facto Authority</div>
+      <div class="auth-body">針對權威本身性質的分類。正當（de jure）指在規範上有資格行使的權威；事實（de facto）則指實際被服從的權威。兩者的關係與張力，是法理學討論的核心戰場。</div>
+      <div class="auth-body-en">A classification by the nature of authority itself. De jure authority has normative entitlement; de facto authority is simply obeyed. The tension between them is one of jurisprudence's central battlegrounds.</div>
+    </div>
+    <div class="auth-card">
+      <div class="auth-num">分類四 · CLASSIFICATION IV</div>
+      <div class="auth-zh">享有權威 vs 身為權威</div>
+      <div class="auth-en">Being in Authority vs. Being an Authority</div>
+      <div class="auth-body">Joseph Raz 的關鍵區分。「享有權威」（in authority）指藉規範授予職位所產生的制度性權威；「身為權威」（be an authority）則指因專業知識而被視為諮詢對象的實質性權威。</div>
+      <div class="auth-body-en">Raz's key distinction. Being "in authority" refers to institutional authority derived from a normatively-created office; being "an authority" refers to epistemic authority based on superior knowledge or expertise.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── THEORISTS ── -->
+<section id="theorists">
+  <div class="sec-eyebrow"><div class="sec-tag">思想家比較 · Theoretical Landscape</div></div>
+  <h2 class="sec-zh">四位法理學家的權威論述</h2>
+  <div class="sec-en">Authority in Four Jurists: Hobbes, Finnis, Raz, Kelsen</div>
+
+  <div class="theorist-tabs">
+    <div class="t-tab active" onclick="showTheorist(0)">Hobbes</div>
+    <div class="t-tab" onclick="showTheorist(1)">Finnis</div>
+    <div class="t-tab" onclick="showTheorist(2)">Raz</div>
+    <div class="t-tab" onclick="showTheorist(3)">Kelsen</div>
+  </div>
+
+  <!-- Hobbes -->
+  <div class="theorist-panel active" id="th-0">
+    <div class="th-ident">
+      <div class="th-name-zh">Hobbes</div>
+      <div class="th-name-en">Thomas Hobbes</div>
+      <div class="th-era">1588 — 1679</div>
+      <span class="th-tag">主權論 Sovereignty</span><br>
+      <span class="th-tag">命令論 Imperative Theory</span><br>
+      <span class="th-tag">社會契約 Social Contract</span>
+    </div>
+    <div class="th-content">
+      <div class="th-section">
+        <div class="th-section-label">核心主張 · Core Claim</div>
+        <div class="th-zh">統治權威結合了「統治權力」（Governmental Power）與「統治權利」（Governmental Right）。主權者憑藉強制力與正當性，使臣民慣習服從法律命令。</div>
+        <div class="th-en">Governmental authority combines "governmental power" and "governmental right." The sovereign uses coercive force and normative legitimacy to habituate subjects to obedience.</div>
+      </div>
+      <div class="th-section">
+        <div class="th-section-label">關鍵難題 · Key Difficulty</div>
+        <div class="th-zh">法的連續性問題：若法律來自主權者的命令，原始立法者已故後，法律的效力根源何在？Hobbes 的回應是：法律的效力來自「現在的權威承認」，而非最初立法者的命令。</div>
+        <div class="th-en">The problem of legal continuity: if law derives from sovereign commands, what grounds it after the original legislator dies? Hobbes answers: law's validity rests on current authoritative recognition, not the original command.</div>
+      </div>
+      <div class="th-section">
+        <div class="th-section-label">對 Kelsen 的啟示 · Relevance to Kelsen</div>
+        <div class="th-zh">Hobbes 的主權論與法的連續性問題，直接呼應了 Kelsen 對「規範效力鏈」的思考——效力最終需要一個無法再向上回溯的起點。</div>
+        <div class="th-en">Hobbes's sovereignty theory and continuity problem directly anticipate Kelsen's chain of validity — validity must ultimately rest on a point that cannot be further justified.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Finnis -->
+  <div class="theorist-panel" id="th-1">
+    <div class="th-ident">
+      <div class="th-name-zh">Finnis</div>
+      <div class="th-name-en">John Finnis</div>
+      <div class="th-era">1940 — </div>
+      <span class="th-tag">自然法 Natural Law</span><br>
+      <span class="th-tag">合作問題 Coordination</span><br>
+      <span class="th-tag">共同善 Common Good</span>
+    </div>
+    <div class="th-content">
+      <div class="th-section">
+        <div class="th-section-label">核心主張 · Core Claim</div>
+        <div class="th-zh">人類的缺陷使權威成為必要。當群體越致力於共同善，權威與規則的需求反而越強——協調合作問題需要一個能快速且確定性作出決定的機構或個人。</div>
+        <div class="th-en">Human limitations make authority necessary. The more a community pursues the common good, the greater the need for authority — coordination problems require an institution capable of reaching quick, certain decisions.</div>
+      </div>
+      <div class="th-section">
+        <div class="th-section-label">慣習成型與權威 · Customary Formation</div>
+        <div class="th-zh">Finnis 試圖用「慣習成型過程」說明權威的起源，但承認這個過程需要某種程度的意見合致，使它在邏輯上呈現笨拙——任何致力共同善的社群，最終都需要一個以上的明確決策者。</div>
+        <div class="th-en">Finnis uses "customary formation" to explain the genesis of authority but admits the process requires a degree of consensus, making it logically awkward — any community truly pursuing the common good ultimately needs explicit decision-makers.</div>
+      </div>
+      <div class="th-section">
+        <div class="th-section-label">對 Kelsen 的啟示 · Relevance to Kelsen</div>
+        <div class="th-zh">Finnis 的「合作問題」框架提醒我們：即使在 Kelsen 的純規範體系中，也潛藏著對「協調秩序需要某種授權者」的預設。</div>
+        <div class="th-en">Finnis's coordination framework reminds us that even within Kelsen's purely normative system, there lurks an implicit assumption that ordered coordination requires some kind of authoriser.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Raz -->
+  <div class="theorist-panel" id="th-2">
+    <div class="th-ident">
+      <div class="th-name-zh">Raz</div>
+      <div class="th-name-en">Joseph Raz</div>
+      <div class="th-era">1939 — 2022</div>
+      <span class="th-tag">服務理論 Service Conception</span><br>
+      <span class="th-tag">先制論點 Preemption</span><br>
+      <span class="th-tag">依賴論點 Dependence</span>
+    </div>
+    <div class="th-content">
+      <div class="th-section">
+        <div class="th-section-label">核心主張 · Core Claim</div>
+        <div class="th-zh">法律宣稱一種合法性權威。其服務理論包含四個相互連結的論點：簡單解釋、依賴論點、規範證成論點、先制論點。合法性權威的指令是行動的「排他理據」，替代而非疊加於主體的自身判斷。</div>
+        <div class="th-en">Law claims legitimate authority. Raz's Service Conception comprises four interlinked theses. A legitimate authority's directives are "exclusionary reasons" — they replace, not supplement, the subject's own judgment.</div>
+      </div>
+      <div class="th-section">
+        <div class="th-section-label">對 Kelsen 的主要挑戰 · Challenge to Kelsen</div>
+        <div class="th-zh">若採 Raz 式的「先制論點」，法律必須能對主體發出具有排他性拘束力的指令，且此指令源自一個有正當性的權威者。然而 Kelsen 的純粹法學中，是否存在這樣的「有正當性的授權者」？這正是本論文的核心問題。</div>
+        <div class="th-en">If Raz's preemption thesis is correct, law must issue binding exclusionary directives from a legitimately authorised source. But does such a legitimately authorised entity exist within Kelsen's Pure Theory? This is the thesis's central question.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Kelsen -->
+  <div class="theorist-panel" id="th-3">
+    <div class="th-ident">
+      <div class="th-name-zh">Kelsen</div>
+      <div class="th-name-en">Hans Kelsen</div>
+      <div class="th-era">1881 — 1973</div>
+      <span class="th-tag">純粹法學 Pure Theory</span><br>
+      <span class="th-tag">充權規範 Empowerment</span><br>
+      <span class="th-tag">基本規範 Grundnorm</span>
+    </div>
+    <div class="th-content">
+      <div class="th-section">
+        <div class="th-section-label">本文的核心主張 · Thesis's Core Claim</div>
+        <div class="th-zh">Kelsen 並未獨立論述「權威」，但其規範體系——尤其是充權規範（Empowerment Norms）與動態規範階層——確實蘊含一種「弱意義」的法律權威概念。這種弱意義的權威，指的是：規範藉由充權授予某人制定另一規範的能力，此即一種授權者（Authoriser）的存在。</div>
+        <div class="th-en">Kelsen never wrote directly about authority, but his normative architecture — particularly Empowerment Norms and the dynamic Stufenbau — does harbour a "weak" concept of legal authority: norms empower persons to create further norms, constituting a weak sense of an "authoriser."</div>
+      </div>
+      <div class="th-section">
+        <div class="th-section-label">為何不是「強意義」的權威 · Why Not "Strong" Authority</div>
+        <div class="th-zh">Kelsen 的規範體系逐漸朝向「客觀化的充權建構」邁進，愈益去除傳統上「命令者—服從者」的人格性關係。因此，其架構至多只能支持弱意義的權威，而無法支撐如 Raz 式或 Hobbes 式的傳統合法性權威論述。</div>
+        <div class="th-en">Kelsen's normative system progressively moved toward "objectified empowerment construction," increasingly eliminating the personal commander-subject relationship. Hence, it can at most support a weak form of authority — not the traditional legitimate authority of Raz or Hobbes.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── RAZ THESES ── -->
+<section id="raz-theses">
+  <div class="sec-eyebrow"><div class="sec-tag">Raz 服務理論 · Raz's Service Conception</div></div>
+  <h2 class="sec-zh">Raz 的四個論點</h2>
+  <div class="sec-en">The Four Theses of Raz's Service Conception of Authority</div>
+
+  <div class="two-col">
+    <div class="raz-chain scroll-reveal">
+      <div class="raz-node">
+        <div class="raz-num"><div class="raz-circle">一</div></div>
+        <div class="raz-body">
+          <div class="raz-title-zh">簡單解釋</div>
+          <div class="raz-title-en">Simple Thesis</div>
+          <div class="raz-desc">「X 擁有對 Y 的權威，如果他說『讓 Y 做ψ』，而這是 Y 做ψ的行動理據。」Raz 的出發點：權威的指令本身就是一種獨立的行動理由。</div>
+          <div class="raz-desc-en">"X has authority over Y if X's saying 'let Y do ψ' is itself a reason for Y to do ψ." Authority's directives are independent reasons for action.</div>
+        </div>
+      </div>
+      <div class="raz-node">
+        <div class="raz-num"><div class="raz-circle">二</div></div>
+        <div class="raz-body">
+          <div class="raz-title-zh">依賴論點</div>
+          <div class="raz-title-en">Dependence Thesis</div>
+          <div class="raz-desc">所有權威性指令，應大部分奠基於適用於命令對象的「依賴理據」——這些理據是獨立於命令本身、在命令所涵蓋情境下直接適用的理由。</div>
+          <div class="raz-desc-en">Authoritative directives should be grounded in "dependent reasons" — reasons that independently apply to the subjects in situations covered by the directive.</div>
+        </div>
+      </div>
+      <div class="raz-node">
+        <div class="raz-num"><div class="raz-circle">三</div></div>
+        <div class="raz-body">
+          <div class="raz-title-zh">規範證成論點</div>
+          <div class="raz-title-en">Normative Justification Thesis</div>
+          <div class="raz-desc">建立合法性權威的規範性方式：若接受權威指令，主體能比直接依自身判斷行動更符合適用於他的那些依賴理據，則權威即具有正當性。</div>
+          <div class="raz-desc-en">Authority is legitimate when accepting its directives helps subjects better conform to the dependent reasons that apply to them — better than acting on their own judgment.</div>
+        </div>
+      </div>
+      <div class="raz-node">
+        <div class="raz-num"><div class="raz-circle">四</div></div>
+        <div class="raz-body">
+          <div class="raz-title-zh">先制論點</div>
+          <div class="raz-title-en">Preemptive Thesis</div>
+          <div class="raz-desc">權威的指令不是疊加於其他理據之上，而是排除並「取代」某些理據——成為一種「排他理據」（Exclusionary Reason）。這是理解 Kelsen 規範體系與傳統權威關係的關鍵張力所在。</div>
+          <div class="raz-desc-en">Authoritative directives do not add to existing reasons — they replace and "preempt" them, functioning as "exclusionary reasons." This is the key tension with Kelsen's normative system.</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="pullquote" style="margin-top:0;">
+        <div class="pq-zh">Raz 認為，若採先制論點，法律必須對主體發出「具有排他性拘束力」的指令。然而 Kelsen 的充權規範是「授予能力」而非「下命令」，這使得兩者之間存在根本的概念落差。</div>
+        <div class="pq-en">Under Raz's preemption thesis, law must issue directives with binding exclusionary force. But Kelsen's empowerment norms "confer capacity" rather than "issue commands" — a fundamental conceptual gap between the two frameworks.</div>
+      </div>
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:1.4rem;margin-top:1.5rem;">
+        <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--copper);margin-bottom:10px;letter-spacing:0.12em;">本文的回應 · THE THESIS'S RESPONSE</div>
+        <div style="font-size:0.88rem;color:var(--muted);line-height:1.7;">對 Raz 式的「強意義」權威而言，Kelsen 的充權規範體系無法提供完整支撐。但這並不等於 Kelsen 完全沒有權威概念——充權規範仍然形成一種「弱意義的授權者關係」，使得法律體系內部存在一種非個人化的規範性權威。</div>
+        <div style="font-family:'EB Garamond',serif;font-style:italic;font-size:0.83rem;color:var(--muted);opacity:0.7;margin-top:8px;line-height:1.65;">For Raz-style "strong" authority, Kelsen's system cannot provide full support. But this does not mean Kelsen has no authority concept — his empowerment norms still constitute a "weak" authoriser-relationship, yielding a depersonalised normative authority within the legal system.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── STUFENBAU ── -->
+<section id="stufenbau">
+  <div class="sec-eyebrow"><div class="sec-tag">規範階層 · Hierarchical Normative Structure</div></div>
+  <h2 class="sec-zh">Kelsen 的規範階層論</h2>
+  <div class="sec-en">The Stufenbau: Kelsen's Hierarchical Structure of Legal Norms</div>
+
+  <div class="pullquote">
+    <div class="pq-zh">「規範階層與機構階層，不會是平行的兩個系統，而是單一的效力鍊。因此它們最終可以回溯到基本規範。基本規範決定法律權力，而不是法律權力決定基本規範。」</div>
+    <div class="pq-en">"The norm-hierarchy and institution-hierarchy are not two parallel systems but a single chain of validity. They ultimately trace back to the Grundnorm. The basic norm determines legal power, not the other way around." — Ch. 3, thesis abstract</div>
+  </div>
+
+  <div class="two-col" style="align-items:start;">
+    <div class="stuf-wrap">
+      <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--copper);margin-bottom:1rem;letter-spacing:0.12em;">點擊展開 · CLICK TO EXPAND</div>
+
+      <div class="stuf-tier s1" onclick="toggleStuf(this)">
+        <div class="stuf-inner">
+          <div><div class="stuf-zh">基本規範</div><div class="stuf-en">Grundnorm / Basic Norm</div></div>
+          <span style="color:var(--copper-dim);font-size:0.8rem;">↕</span>
+        </div>
+        <div class="stuf-detail">法律效力體系的終極前提。非實證性的規範，而是使整個法律秩序得以被思考為規範性秩序的預設條件。晚期 Kelsen 對其本質提出根本性懷疑。<span class="stuf-detail-en">The ultimate presupposition of the legal validity system. Not a positive norm, but the condition that makes it possible to think of the legal order as a normative order. The late Kelsen raised fundamental doubts about its nature.</span></div>
+      </div>
+      <div class="stuf-arrow">↓</div>
+
+      <div class="stuf-tier s2" onclick="toggleStuf(this)">
+        <div class="stuf-inner">
+          <div><div class="stuf-zh">憲法</div><div class="stuf-en">Constitution</div></div>
+          <span style="color:#7868A8;font-size:0.8rem;">↕</span>
+        </div>
+        <div class="stuf-detail">由基本規範授權制定的最高實定法規範。充權立法機關制定一般性法律，並規範法律制定的程序。<span class="stuf-detail-en">The highest positive law, authorised by the Grundnorm. It empowers the legislature to create general statutes and regulates the procedure of law-making.</span></div>
+      </div>
+      <div class="stuf-arrow">↓</div>
+
+      <div class="stuf-tier s3" onclick="toggleStuf(this)">
+        <div class="stuf-inner">
+          <div><div class="stuf-zh">一般性法律</div><div class="stuf-en">Statutes / General Norms</div></div>
+          <span style="color:#4A8CA8;font-size:0.8rem;">↕</span>
+        </div>
+        <div class="stuf-detail">依憲法規定之程序由立法機關制定的一般規範，充權行政機關發布命令，並為個別規範提供授權基礎。<span class="stuf-detail-en">General norms created by the legislature following constitutional procedure. They empower administrative bodies to issue regulations and provide the authorising basis for individual norms.</span></div>
+      </div>
+      <div class="stuf-arrow">↓</div>
+
+      <div class="stuf-tier s4" onclick="toggleStuf(this)">
+        <div class="stuf-inner">
+          <div><div class="stuf-zh">行政命令 · 司法判決</div><div class="stuf-en">Regulations / Judicial Decisions</div></div>
+          <span style="color:#4A9068;font-size:0.8rem;">↕</span>
+        </div>
+        <div class="stuf-detail">由授權機關（行政或司法）依據一般法律創制的個別規範。判決與命令皆是依充權規範制定，構成法律適用的核心層次。<span class="stuf-detail-en">Individual norms created by authorised agencies (administrative or judicial) pursuant to general statutes. Both judicial decisions and regulations are created under empowering norms, forming the core level of law application.</span></div>
+      </div>
+      <div class="stuf-arrow">↓</div>
+
+      <div class="stuf-tier s5" onclick="toggleStuf(this)">
+        <div class="stuf-inner">
+          <div><div class="stuf-zh">個別法律行為</div><div class="stuf-en">Individual Legal Acts</div></div>
+          <span style="color:#906060;font-size:0.8rem;">↕</span>
+        </div>
+        <div class="stuf-detail">依法律規範授權的私人行為，如契約、遺囑。在 Kelsen 的體系中，私人自治亦被整合為規範創制的一環，私法行為同樣受到充權規範的統御。<span class="stuf-detail-en">Private acts authorised by legal norms, such as contracts and wills. In Kelsen's system, private autonomy is also integrated as a form of norm-creation, equally governed by empowering norms.</span></div>
+      </div>
+    </div>
+
+    <div>
+      <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--copper);margin-bottom:1rem;letter-spacing:0.12em;">效力鍊的意義 · THE SIGNIFICANCE OF THE CHAIN OF VALIDITY</div>
+      <div style="font-size:0.9rem;color:var(--muted);line-height:1.75;margin-bottom:1.5rem;">整個 Stufenbau 由「充權」（Empowerment）的概念貫穿：每一層規範都由上一層規範充權制定，形成動態的規範效力鏈。這種結構就是 Kelsen「弱意義權威」的所在——並非人格化的命令者，而是規範間的授權關係。</div>
+      <div style="font-family:'EB Garamond',serif;font-style:italic;font-size:0.85rem;color:var(--muted);opacity:0.7;line-height:1.7;margin-bottom:2rem;">The entire Stufenbau is threaded through by the concept of "empowerment": each layer is authorised to create norms by the layer above, forming a dynamic chain of validity. This structure is where Kelsen's "weak authority" resides — not a personalised commander, but the authorising relationship between norms.</div>
+
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:1.4rem;">
+        <div style="font-family:'Space Mono',monospace;font-size:10px;color:var(--copper);margin-bottom:10px;letter-spacing:0.1em;">基本規範的困境 · GRUNDNORM DILEMMA</div>
+        <div style="font-size:0.85rem;color:var(--muted);line-height:1.7;">若基本規範是「擬制」（fiction）或純粹假設，它還能作為傳統意義上的「合法性權威」嗎？懷疑期的 Kelsen 對此給出了否定的答案——這正是其體系最終只能支持「弱意義」而非「傳統意義」權威的深層原因。</div>
+        <div style="font-family:'EB Garamond',serif;font-style:italic;font-size:0.82rem;color:var(--muted);opacity:0.7;margin-top:8px;line-height:1.65;">If the Grundnorm is a "fiction" or mere hypothesis, can it serve as "legitimate authority" in the traditional sense? The late Kelsen's answer was essentially negative — this is the deep reason his system can ultimately support only "weak" rather than "traditional" authority.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── NORM FUNCTIONS ── -->
+<section id="norms">
+  <div class="sec-eyebrow"><div class="sec-tag">晚期規範論 · Late Kelsen's Norm Theory</div></div>
+  <h2 class="sec-zh">規範的四種功能</h2>
+  <div class="sec-en">Four Functions of Norms in Late Kelsen</div>
+  <p style="color:var(--muted);max-width:620px;margin-bottom:2rem;font-size:0.9rem;line-height:1.75;">晚期 Kelsen 在《一般規範理論》（GTN, 1979）中將規範依其功能分為四類。其中「充權規範」的地位，是本論文主張 Kelsen 具有弱意義權威的核心依據。<em style="font-family:'EB Garamond',serif;display:block;margin-top:6px;opacity:0.7;font-size:0.88rem;">In the General Theory of Norms (1979), the late Kelsen classified norms by function into four types. The status of "empowering norms" is the central evidence for the thesis's claim that Kelsen has a weak concept of authority.</em></p>
+
+  <div class="norm-grid scroll-reveal">
+    <div class="norm-card nc-1">
+      <div class="nc-icon">⊕</div>
+      <div class="nc-zh">命令規範</div>
+      <div class="nc-en">Commanding Norms</div>
+      <div class="nc-desc">命令或禁止某種行為。傳統法理學中最常見的規範形式，直接對應義務的概念。</div>
+      <div class="nc-desc-en">Norms that command or prohibit behaviour. The most familiar form in traditional jurisprudence, directly corresponding to the concept of obligation.</div>
+    </div>
+    <div class="norm-card nc-2">
+      <div class="nc-icon">⊖</div>
+      <div class="nc-zh">廢除規範</div>
+      <div class="nc-en">Derogating Norms</div>
+      <div class="nc-desc">廢止、撤銷或終止另一規範效力的規範。展示了規範體系的動態性：規範可以被合法地消滅。</div>
+      <div class="nc-desc-en">Norms that repeal, revoke, or terminate the validity of another norm. They demonstrate the dynamic character of the normative system — norms can be legitimately extinguished.</div>
+    </div>
+    <div class="norm-card nc-3">
+      <div class="nc-icon">⊘</div>
+      <div class="nc-zh">允許規範</div>
+      <div class="nc-en">Permitting Norms</div>
+      <div class="nc-desc">允許某種行為，通常是對命令規範或禁止的部分解除。在 Kelsen 的晚期著作中，允許規範的地位與性質是爭議焦點之一。</div>
+      <div class="nc-desc-en">Norms that permit behaviour, typically by partially lifting a command or prohibition. In late Kelsen, the status and nature of permitting norms was a contested topic.</div>
+    </div>
+    <div class="norm-card nc-4">
+      <div class="nc-icon">⊛</div>
+      <div class="nc-zh">充權規範</div>
+      <div class="nc-en">Empowering Norms</div>
+      <div class="nc-desc">授予某人制定規範的能力或「法律權力」（Legal Power）。這是 Kelsen 規範體系中最具特色的形式，也是論文主張 Kelsen 具有「弱意義授權者」的核心：規範授予能力，即創造出一種非個人化的「授權者」關係。</div>
+      <div class="nc-desc-en">Norms that confer upon a person the capacity or "legal power" to create norms. This is Kelsen's most distinctive normative form, and the core of the thesis's claim: by conferring capacity, norms create a depersonalised "authoriser-relationship" — the basis of weak authority.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── VALIDITY ── -->
+<section id="validity">
+  <div class="sec-eyebrow"><div class="sec-tag">效力論 · Theory of Validity</div></div>
+  <h2 class="sec-zh">效力的三種型態</h2>
+  <div class="sec-en">Three Types of Legal Validity in Kelsen</div>
+
+  <div class="valid-grid scroll-reveal">
+    <div class="v-card">
+      <div class="v-zhnum">第一型</div>
+      <div class="v-zh">系統效力</div>
+      <div class="v-en">Systemic Validity</div>
+      <div class="v-desc">規範屬於某一法律體系，意即其制定符合該體系中更高規範的充權條件。這是 Kelsen 體系中最核心的效力概念：效力等同於存在。</div>
+      <div class="v-desc-en">A norm belongs to a legal system — meaning its creation conforms to the empowerment conditions of higher norms within that system. This is Kelsen's central validity concept: validity equals existence.</div>
+      <div class="v-kelsen v-k1">Kelsen 主要採取 · Kelsen's Primary</div>
+    </div>
+    <div class="v-card">
+      <div class="v-zhnum">第二型</div>
+      <div class="v-zh">事實效力</div>
+      <div class="v-en">Factual Validity</div>
+      <div class="v-desc">規範實際上被遵守或執行。對 Kelsen 而言，這是一個「實效」（Efficacy）問題，而非效力問題。法律規範的效力不取決於實際遵守，但法律體系整體需要一定程度的實效。</div>
+      <div class="v-desc-en">A norm is actually obeyed or enforced. For Kelsen, this is a matter of "efficacy," not validity. A norm's validity does not depend on compliance, but the legal order as a whole requires some degree of efficacy.</div>
+      <div class="v-kelsen v-k2">Kelsen 區分為「實效」 · Distinguished as Efficacy</div>
+    </div>
+    <div class="v-card">
+      <div class="v-zhnum">第三型</div>
+      <div class="v-zh">價值論效力</div>
+      <div class="v-en">Axiological Validity</div>
+      <div class="v-desc">規範在道德上是正當的或有約束力的。Kelsen 的法律實證主義拒絕將效力建立於此型態上——法律效力獨立於道德判斷，這正是純粹法學的核心立場。</div>
+      <div class="v-desc-en">A norm is morally justified or binding. Kelsen's legal positivism explicitly rejects grounding validity here — legal validity is independent of moral judgment. This is the core stance of the Pure Theory.</div>
+      <div class="v-kelsen v-k3">Kelsen 明確拒絕 · Kelsen Explicitly Rejects</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONCLUSION ── -->
+<section id="conclusion">
+  <div class="sec-eyebrow"><div class="sec-tag">結論 · Conclusions</div></div>
+  <h2 class="sec-zh">本論文的四個結論</h2>
+  <div class="sec-en">Four Conclusions of the Thesis</div>
+
+  <div class="pullquote">
+    <div class="pq-zh">Kelsen 的規範體系並非沒有「權威」，而是它所蘊含的權威，只能是一種去個人化的、規範性的「弱意義」——足以使法律體系運作，卻不足以成為 Raz 或 Hobbes 意義下的傳統合法性權威。</div>
+    <div class="pq-en">Kelsen's normative system is not without "authority" — but the authority it harbours can only be a depersonalised, normative "weak" form. Sufficient to keep the legal system running; insufficient to constitute traditional legitimate authority in the sense of Raz or Hobbes.</div>
+  </div>
+
+  <div class="conc-list">
+    <div class="conc-item scroll-reveal">
+      <div class="conc-num">01</div>
+      <div class="conc-body">
+        <div class="conc-zh">傳統權威論述無法提供正確的方式</div>
+        <div class="conc-en">Traditional conceptions of authority cannot provide the right framework for Kelsen</div>
+        <div class="conc-explain">Hobbes 的主權命令論、Finnis 的合作問題自然法，以及 Raz 的服務理論，都無法直接套用於 Kelsen 的規範架構。這些傳統論述預設了一個「有正當性的命令者」，然而 Kelsen 的體系試圖從規範本身出發，排除人格化的授權者。</div>
+        <div class="conc-explain-en">Hobbes's sovereign command theory, Finnis's natural law of coordination, and Raz's service conception all fail to map directly onto Kelsen's normative architecture. These traditional accounts presuppose a "legitimately authorised commander" — precisely what Kelsen's system tries to eliminate through depersonalised norm-creation.</div>
+      </div>
+    </div>
+    <div class="conc-item scroll-reveal">
+      <div class="conc-num">02</div>
+      <div class="conc-body">
+        <div class="conc-zh">Kelsen 具有法律權威概念</div>
+        <div class="conc-en">Kelsen does possess a concept of legal authority</div>
+        <div class="conc-explain">儘管 Kelsen 未曾單獨論述「權威」，但透過規範體系的動態結構——尤其是充權規範的授予能力——可以辨識出一種弱意義的法律授權者概念。區分「法官命令」與「匪徒命令」的正是這種規範性充權，而非訴諸人格化的主權者。</div>
+        <div class="conc-explain-en">Although Kelsen never wrote directly about authority, through the dynamic structure of his normative system — especially the capacity-conferring role of empowerment norms — a weak concept of legal authorisation can be identified. What distinguishes a judge's order from a bandit's command is precisely this normative empowerment, not an appeal to a personalised sovereign.</div>
+      </div>
+    </div>
+    <div class="conc-item scroll-reveal">
+      <div class="conc-num">03</div>
+      <div class="conc-body">
+        <div class="conc-zh">規範架構與充權規範可以支持弱意義的權威概念</div>
+        <div class="conc-en">The normative framework and empowerment norms support a weak reading of authority</div>
+        <div class="conc-explain">Kelsen 規範體系的中心——充權規範與動態 Stufenbau——形成一種「去個人化的授權者關係」：規範充權某人制定規範，此即弱意義的權威。這種弱意義的權威足以使法律體系運作，並解釋法律義務的獨特性格。</div>
+        <div class="conc-explain-en">The core of Kelsen's normative system — empowerment norms and the dynamic Stufenbau — forms a "depersonalised authoriser-relationship": norms empower persons to create norms, constituting weak authority. This weak authority is sufficient to operate the legal system and explain the distinctive character of legal obligation.</div>
+      </div>
+    </div>
+    <div class="conc-item scroll-reveal">
+      <div class="conc-num">04</div>
+      <div class="conc-body">
+        <div class="conc-zh">Kelsen 的論述較無法支持強閱讀或傳統意義的合法性權威</div>
+        <div class="conc-en">Kelsen's framework cannot sustain a "strong reading" or traditional legitimate authority</div>
+        <div class="conc-explain">Kelsen 規範體系朝向「客觀化充權建構」的發展方向，使其逐漸無法支撐「命令者—服從者」的人格性授權關係。晚期 Kelsen 對基本規範本質的懷疑，更進一步封閉了傳統合法性權威論述的出路，確認弱意義的權威是 Kelsen 體系的最大限度。</div>
+        <div class="conc-explain-en">The trajectory of Kelsen's normative system toward "objectified empowerment construction" progressively closes off the personalised commander-subject relationship required for strong authority. The late Kelsen's doubts about the Grundnorm further foreclose the path to traditional legitimate authority, confirming that weak authority is the maximum the Kelsenian system can sustain.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── INTELLECTUAL ARC ── -->
+<!-- CROSS_LINK_TARGET: adjust href if repo layout differs -->
+<section id="arc">
+  <div class="sec-eyebrow"><div class="sec-tag">研究軸線 · Research Trajectory</div></div>
+  <h2 class="sec-zh">學術研究軸線</h2>
+  <div class="sec-en">The Intellectual Arc — Two Theses, One Question</div>
+  <p style="color:var(--muted);max-width:620px;margin-bottom:2rem;font-size:0.9rem;line-height:1.75;">兩篇論文，相隔十八年，從不同角度探問同一個核心問題——先是法理學，再是 AI 治理，如今走向兩者的綜合。<em style="font-family:'EB Garamond',serif;display:block;margin-top:6px;opacity:0.7;font-size:0.88rem;">Two theses, eighteen years apart, examine the same underlying question from different angles — jurisprudence, then AI governance, now their synthesis.</em></p>
+
+  <div class="pullquote">
+    <div class="pq-zh">兩篇論文，相隔十八年，同一個問題：<em style="color:var(--copper);font-style:normal;font-weight:600;">誰授權了規範？</em></div>
+    <div class="pq-en">Two theses, eighteen years apart, one question: <em>who authorises the norm?</em></div>
+  </div>
+
+  <div class="arc-grid scroll-reveal">
+
+    <div class="arc-node">
+      <div class="arc-year">2006</div>
+      <div class="arc-label">法理學之問 · The Jurisprudential Question</div>
+      <div class="arc-title-zh">規範體系能否承載權威？</div>
+      <div class="arc-title-en">Can a normative system carry authority?</div>
+      <div class="arc-body">《論 Kelsen 的權威概念》（臺大，2006）的回答：只有弱意義、去人格化的權威——規範充權他人創制規範。沒有命令者，只有充權之鏈。</div>
+      <div class="arc-body-en">On Kelsen's Concept of Authority (NTU, 2006) answered: only a weak, depersonalised authority — norms empowering persons to create norms. No commander, only a chain of empowerment.</div>
+      <a class="arc-link" href="#conclusion">閱讀本論文結論 ↑ · Read this thesis's conclusions</a>
+    </div>
+
+    <div class="arc-connector">→</div>
+
+    <div class="arc-node">
+      <div class="arc-year">2024</div>
+      <div class="arc-label">治理之問 · The Governance Question</div>
+      <div class="arc-title-zh">權利框架能否承載 AI 治理？</div>
+      <div class="arc-title-en">Can a rights framework carry AI governance?</div>
+      <div class="arc-body">《基礎模型與生成式 AI 之規制》（魯汶，2024）的回答：歐盟的基本權利錨定，產出與中國「文本相似但無憲法錨定」體制結構性不同的結果。</div>
+      <div class="arc-body-en">Regulation of Foundational Models and Generative AI (KU Leuven, 2024) answered: the EU's fundamental-rights anchoring produces structurally different outcomes than China's textually similar but constitutionally unanchored regime.</div>
+      <a class="arc-link" href="../">探索 2024 論文 → · Explore the 2024 thesis</a>
+    </div>
+
+    <div class="arc-connector">→</div>
+
+    <div class="arc-node arc-node-progress">
+      <div class="arc-year">2026 <span class="arc-tag-progress">進行中 · IN PROGRESS</span></div>
+      <div class="arc-label">綜合 · The Synthesis</div>
+      <div class="arc-title-zh">計算系統能否承載規範？</div>
+      <div class="arc-title-en">Can a computational system carry norms?</div>
+      <div class="arc-body">進行中的研究——機器可執行法律本體論（MAILO）、演算法先制命題、準拘束治理工具的效力——帶著 2024 的材料回到 2006 的答案：無人格的充權，以機器速度受測。</div>
+      <div class="arc-body-en">Ongoing work — machine-executable legal ontologies (MAILO), the algorithmic preemption thesis, and the validity of quasi-binding governance instruments — returns to the 2006 answer with 2024's materials: empowerment without persons, tested at machine speed.</div>
+    </div>
+
+  </div>
+
+  <div style="text-align:center;margin-top:3rem;">
+    <a class="arc-cta" href="../">探索 2024 論文：基礎模型與生成式 AI 之規制 · Foundational Models &amp; Data Protection →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="ft-zh">論 Kelsen 的權威概念 · 國立臺灣大學法律學系碩士論文 · 中華民國九十五年六月</div>
+  <div class="ft-en">On Kelsen's Concept of Authority · Master's Thesis, National Taiwan University Faculty of Law · June 2006</div>
+  <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--copper-dim);margin-top:10px;letter-spacing:0.12em;">指導教授：顏厥安 博士 · Supervisor: Prof. Chueh-An Yen · Visualisation for academic reference</div>
+</footer>
+
+<script>
+function showTheorist(n) {
+  document.querySelectorAll('.theorist-panel').forEach((p,i) => p.classList.toggle('active', i===n));
+  document.querySelectorAll('.t-tab').forEach((t,i) => t.classList.toggle('active', i===n));
+}
+function toggleStuf(el) {
+  el.querySelector('.stuf-detail').classList.toggle('open');
+}
+function getTheme() { return document.documentElement.getAttribute('data-theme') || 'dark'; }
+function toggleTheme() {
+  var t = getTheme() === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', t);
+  localStorage.setItem('kl-theme', t);
+  updateBtn(t);
+}
+function updateBtn(t) {
+  var btn = document.getElementById('themeBtn');
+  if (btn) btn.textContent = t === 'dark' ? '◑ LIGHT' : '◐ DARK';
+}
+const obs = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } }), { threshold:0.1 });
+document.querySelectorAll('.scroll-reveal').forEach(el => obs.observe(el));
+updateBtn(getTheme());
+</script>
+</body>
+</html>
